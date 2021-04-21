@@ -29,7 +29,14 @@ class UserLogin (Resource):
     def post(self):
         data = parser.parse_args()
         current_user=Auth.find_username(data['username'])
-        return current_user
+        if not current_user:
+            return {"message":"User {} dose not exist ". format(data['username'])}
+
+        
+        if data['password']== current_user.password:
+            return {"message":"Logged in as {}". format(current_user.username)}
+        else:
+            return "Password dose not match"
 
 
 class UserLogoutAccess (Resource):

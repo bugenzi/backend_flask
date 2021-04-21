@@ -19,6 +19,5 @@ class Auth(db.Model):
 
     @classmethod
     def find_username(cls,username):
-        print("cls",cls)
         return cls.query.filter_by(username = username).first()
         
